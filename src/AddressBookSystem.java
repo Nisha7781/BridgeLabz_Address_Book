@@ -108,7 +108,7 @@ public class AddressBookSystem
         System.out.println("Contact added successfully! \n");
     }
 
-     void editContact()
+    void editContact()
     {
         System.out.println("Enter the first name of the contact to edit: ");
         String fnameToEdit = sc.nextLine();
