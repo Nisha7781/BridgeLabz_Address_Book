@@ -52,16 +52,19 @@ public class AddressBookSystem
 
     public void AddressBook()
     {
-        while (true) {
+        while (true)
+        {
             System.out.println("Address Book System");
             System.out.println("1. Add Contact");
             System.out.println("2. Edit Contact");
-            System.out.println("3. Exit");
+            System.out.println("3. Delete Contact");
+            System.out.println("4. Exit");
             System.out.print("Enter your choice: ");
             int choice = sc.nextInt();
             sc.nextLine();
 
-            switch (choice) {
+            switch (choice)
+            {
                 case 1:
                     addContact();
                     break;
@@ -69,6 +72,9 @@ public class AddressBookSystem
                     editContact();
                     break;
                 case 3:
+                    deleteContact();
+                    break;
+                case 4:
                     System.out.println("Exiting...");
                     return;
                 default:
@@ -128,6 +134,24 @@ public class AddressBookSystem
                 System.out.println("Contact details updated successfully! \n");
                 System.out.println("Updated Contact Details:");
                 System.out.println(contact);
+                return;
+            }
+        }
+        System.out.println("Contact not found!");
+    }
+
+    void deleteContact()
+    {
+        System.out.println("Enter the first name of the contact to delete: ");
+        String fnameToDelete = sc.nextLine();
+        Iterator<Contact> iterator = contacts.iterator();
+        while (iterator.hasNext())
+        {
+            Contact contact = iterator.next();
+            if (contact.firstName.equalsIgnoreCase(fnameToDelete))
+            {
+                iterator.remove();
+                System.out.println("Contact deleted successfully! \n");
                 return;
             }
         }
