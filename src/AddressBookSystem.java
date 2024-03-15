@@ -77,7 +77,7 @@ public class AddressBookSystem
         }
     }
 
-    private void addContact()
+    void addContact()
     {
         System.out.print("Enter First Name: ");
         String firstName = sc.nextLine();
@@ -102,7 +102,7 @@ public class AddressBookSystem
         System.out.println("Contact added successfully! \n");
     }
 
-    private void editContact()
+     void editContact()
     {
         System.out.println("Enter the first name of the contact to edit: ");
         String fnameToEdit = sc.nextLine();
