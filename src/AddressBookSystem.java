@@ -3,8 +3,6 @@ import java.util.*;
 public class AddressBookSystem
 {
     private HashMap<String, AddressBook> addressBooks = new HashMap<>();
-    private HashMap<String, List<Contact>> cityToPersonMap = new HashMap<>();
-    private HashMap<String, List<Contact>> stateToPersonMap = new HashMap<>();
     static Scanner sc = new Scanner(System.in);
 
 
