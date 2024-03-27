@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 class AddressBook
 {
@@ -96,5 +98,12 @@ class AddressBook
 
     String getAddressBookName() {
         return addressBookName;
+    }
+
+    List<Contact> searchPersonByCityState(String cityOrState)
+    {
+        return contacts.stream()
+                .filter(contact -> contact.city.equalsIgnoreCase(cityOrState) || contact.state.equalsIgnoreCase(cityOrState))
+                .collect(Collectors.toList());
     }
 }

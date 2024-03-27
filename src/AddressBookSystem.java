@@ -20,7 +20,8 @@ public class AddressBookSystem
             System.out.println("Address Book System");
             System.out.println("1. Create New Address Book");
             System.out.println("2. Open Address Book");
-            System.out.println("3. Exit");
+            System.out.println("3. Search Person by City or State");
+            System.out.println("4. Exit");
             System.out.print("Enter your choice: ");
             int choice = sc.nextInt();
             sc.nextLine();
@@ -34,6 +35,9 @@ public class AddressBookSystem
                     openAddressBook();
                     break;
                 case 3:
+                    searchPersonByCityState();
+                    break;
+                case 4:
                     System.out.println("Exiting...");
                     return;
                 default:
@@ -42,21 +46,26 @@ public class AddressBookSystem
         }
     }
 
-     void createAddressBook() {
-         System.out.print("Enter the name of the new Address Book: ");
-         String newAddressBookName = sc.nextLine();
+    void createAddressBook()
+    {
+        System.out.print("Enter the name of the new Address Book: ");
+        String newAddressBookName = sc.nextLine();
 
-         if (addressBooks.containsKey(newAddressBookName)) {
-             System.out.println("Address Book already exists!");
-         } else {
-             AddressBook newAddressBook = new AddressBook(newAddressBookName);
-             addressBooks.put(newAddressBookName, newAddressBook);
-             System.out.println("New Address Book created successfully!");
-             runAddressBookMenu(newAddressBook);
-         }
-     }
-     void openAddressBook()
-     {
+        if (addressBooks.containsKey(newAddressBookName))
+        {
+            System.out.println("Address Book already exists!");
+        }
+        else
+        {
+            AddressBook newAddressBook = new AddressBook(newAddressBookName);
+            addressBooks.put(newAddressBookName, newAddressBook);
+            System.out.println("New Address Book created successfully!");
+            runAddressBookMenu(newAddressBook);
+        }
+    }
+
+    void openAddressBook()
+    {
         System.out.print("Enter the name of the Address Book : ");
         String addressBookName = sc.nextLine();
 
@@ -64,15 +73,13 @@ public class AddressBookSystem
         {
             AddressBook addressBook = addressBooks.get(addressBookName);
             runAddressBookMenu(addressBook);
-        }
-        else
-        {
+        } else {
             System.out.println("Address Book does not exist!");
         }
     }
 
-     void runAddressBookMenu(AddressBook addressBook)
-     {
+    void runAddressBookMenu(AddressBook addressBook)
+    {
         System.out.println("Welcome to " + addressBook.getAddressBookName() + " Address Book...");
 
         while (true)
@@ -104,5 +111,29 @@ public class AddressBookSystem
             }
         }
     }
-}
 
+    void searchPersonByCityState()
+    {
+        System.out.print("Enter city or state to search for persons: ");
+        String cityOrState = sc.nextLine();
+
+        List<Contact> matchingContacts = new ArrayList<>();
+        for (AddressBook addressBook : addressBooks.values())
+        {
+            matchingContacts.addAll(addressBook.searchPersonByCityState(cityOrState));
+        }
+
+        if (matchingContacts.isEmpty())
+        {
+            System.out.println("No matching contacts found in any address book.");
+        } else
+        {
+            System.out.println("Matching contacts found in the following address books:");
+            for (Contact contact : matchingContacts)
+            {
+                System.out.println(contact);
+                System.out.println();
+            }
+        }
+    }
+}
