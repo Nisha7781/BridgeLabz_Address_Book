@@ -24,8 +24,11 @@ public class AddressBookSystem
             System.out.println("3. Search Person by City or State");
             System.out.println("4. Count contact by city");
             System.out.println("5. Count contact by State");
-            System.out.println("6. Sort address book by name");
-            System.out.println("7. Exit");
+            System.out.println("6. Sort contacts in address book by name");
+            System.out.println("7. Sort contacts in address book by city");
+            System.out.println("8. Sort contacts in address book by state");
+            System.out.println("9. Sort contacts in address book by zip");
+            System.out.println("10. Exit");
             System.out.print("Enter your choice: ");
             int choice = sc.nextInt();
             sc.nextLine();
@@ -51,6 +54,15 @@ public class AddressBookSystem
                     sortAddressBookByName();
                     break;
                 case 7:
+                    sortAddressBookByCity();
+                    break;
+                case 8:
+                    sortAddressBookByState();
+                    break;
+                case 9:
+                    sortAddressBookByZip();
+                    break;
+                case 10:
                     System.out.println("Exiting...");
                     return;
                 default:
@@ -212,4 +224,61 @@ public class AddressBookSystem
             System.out.println("Address Book does not exist!");
         }
     }
+    void sortAddressBookByCity()
+    {
+        System.out.print("Enter the name of the Address Book to sort: ");
+        String addressBookName = sc.nextLine();
+
+        if (addressBooks.containsKey(addressBookName))
+        {
+            AddressBook addressBook = addressBooks.get(addressBookName);
+            addressBook.sortContactsByCity();
+            System.out.println("Address Book sorted by name.");
+            System.out.println(addressBook);
+
+        }
+        else
+        {
+            System.out.println("Address Book does not exist!");
+        }
+    }
+
+    void sortAddressBookByState()
+    {
+        System.out.print("Enter the name of the Address Book to sort: ");
+        String addressBookName = sc.nextLine();
+
+        if (addressBooks.containsKey(addressBookName))
+        {
+            AddressBook addressBook = addressBooks.get(addressBookName);
+            addressBook.sortContactsByState();
+            System.out.println("Address Book sorted by name.");
+            System.out.println(addressBook);
+
+        }
+        else
+        {
+            System.out.println("Address Book does not exist!");
+        }
+    }
+
+    void sortAddressBookByZip()
+    {
+        System.out.print("Enter the name of the Address Book to sort: ");
+        String addressBookName = sc.nextLine();
+
+        if (addressBooks.containsKey(addressBookName))
+        {
+            AddressBook addressBook = addressBooks.get(addressBookName);
+            addressBook.sortContactsByZip();
+            System.out.println("Address Book sorted by name.");
+            System.out.println(addressBook);
+
+        }
+        else
+        {
+            System.out.println("Address Book does not exist!");
+        }
+    }
+
 }

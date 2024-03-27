@@ -141,6 +141,27 @@ class AddressBook
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
+    void sortContactsByCity()
+    {
+        contacts = contacts.stream()
+                .sorted(Comparator.comparing(contact -> contact.city))
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    void sortContactsByState()
+    {
+        contacts = contacts.stream()
+                .sorted(Comparator.comparing(contact -> contact.state))
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    void sortContactsByZip()
+    {
+        contacts = contacts.stream()
+                .sorted(Comparator.comparing(contact -> contact.zip))
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
     @Override
     public String toString()
     {
