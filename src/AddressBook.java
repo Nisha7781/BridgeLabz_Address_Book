@@ -100,6 +100,7 @@ class AddressBook
         return addressBookName;
     }
 
+    //search person
     List<Contact> searchPersonByCityState(String cityOrState)
     {
         return contacts.stream()
@@ -107,6 +108,7 @@ class AddressBook
                 .collect(Collectors.toList());
     }
 
+    //View Persons
     void viewPersonsByCity(String city)
     {
         contacts.stream()
@@ -119,5 +121,18 @@ class AddressBook
         contacts.stream()
                 .filter(contact -> contact.state.equalsIgnoreCase(state))
                 .forEach(System.out::println);
+    }
+
+    //Count contacts:
+    long countContactsByCity(String city) {
+        return contacts.stream()
+                .filter(contact -> contact.city.equalsIgnoreCase(city))
+                .count();
+    }
+
+    long countContactsByState(String state) {
+        return contacts.stream()
+                .filter(contact -> contact.state.equalsIgnoreCase(state))
+                .count();
     }
 }

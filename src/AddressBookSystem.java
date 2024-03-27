@@ -3,8 +3,6 @@ import java.util.*;
 public class AddressBookSystem
 {
     private HashMap<String, AddressBook> addressBooks = new HashMap<>();
-    private HashMap<String, List<Contact>> cityToPersonMap = new HashMap<>();
-    private HashMap<String, List<Contact>> stateToPersonMap = new HashMap<>();
     static Scanner sc = new Scanner(System.in);
 
 
@@ -24,7 +22,9 @@ public class AddressBookSystem
             System.out.println("1. Create New Address Book");
             System.out.println("2. Open Address Book");
             System.out.println("3. Search Person by City or State");
-            System.out.println("4. Exit");
+            System.out.println("4. Count contact by city");
+            System.out.println("5. Count contact by State");
+            System.out.println("6. Exit");
             System.out.print("Enter your choice: ");
             int choice = sc.nextInt();
             sc.nextLine();
@@ -41,6 +41,12 @@ public class AddressBookSystem
                     searchPersonByCityState();
                     break;
                 case 4:
+                    countContactsByCity();
+                    break;
+                case 5:
+                    countContactsByState();
+                    break;
+                case 6:
                     System.out.println("Exiting...");
                     return;
                 default:
@@ -123,6 +129,7 @@ public class AddressBookSystem
         }
     }
 
+    //Search person
     void searchPersonByCityState()
     {
         System.out.print("Enter city or state to search for persons: ");
@@ -148,6 +155,7 @@ public class AddressBookSystem
         }
     }
 
+    //View  persons
     void viewPersonsByCity(AddressBook addressBook) {
         System.out.print("Enter the city to search: ");
         String city = sc.nextLine();
@@ -160,5 +168,24 @@ public class AddressBookSystem
         String state = sc.nextLine();
         System.out.println("Persons in " + state + ":");
         addressBook.viewPersonsByState(state);
+    }
+
+    //count persons:
+    void countContactsByCity() {
+        System.out.print("Enter the city to count contacts: ");
+        String city = sc.nextLine();
+        long count = addressBooks.values().stream()
+                .mapToLong(addressBook -> addressBook.countContactsByCity(city))
+                .sum();
+        System.out.println("\nTotal contacts in " + city + ": " + count);
+    }
+
+    void countContactsByState() {
+        System.out.print("Enter the state to count contacts: ");
+        String state = sc.nextLine();
+        long count = addressBooks.values().stream()
+                .mapToLong(addressBook -> addressBook.countContactsByState(state))
+                .sum();
+        System.out.println("\nTotal contacts in " + state + ": " + count);
     }
 }
