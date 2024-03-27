@@ -3,7 +3,10 @@ import java.util.*;
 public class AddressBookSystem
 {
     private HashMap<String, AddressBook> addressBooks = new HashMap<>();
+    private HashMap<String, List<Contact>> cityToPersonMap = new HashMap<>();
+    private HashMap<String, List<Contact>> stateToPersonMap = new HashMap<>();
     static Scanner sc = new Scanner(System.in);
+
 
     public static void main(String[] args)
     {
@@ -87,7 +90,9 @@ public class AddressBookSystem
             System.out.println("1. Add Contact");
             System.out.println("2. Edit Contact");
             System.out.println("3. Delete Contact");
-            System.out.println("4. Go Back");
+            System.out.println("4. View person by city");
+            System.out.println("5. View person by state");
+            System.out.println("6. Go Back");
             System.out.print("Enter your choice: ");
             int choice = sc.nextInt();
             sc.nextLine();
@@ -104,6 +109,12 @@ public class AddressBookSystem
                     addressBook.deleteContact(sc);
                     break;
                 case 4:
+                    viewPersonsByCity(addressBook);
+                    break;
+                case 5:
+                    viewPersonsByState(addressBook);
+                    break;
+                case 6:
                     System.out.println("Going back...");
                     return;
                 default:
@@ -135,5 +146,19 @@ public class AddressBookSystem
                 System.out.println();
             }
         }
+    }
+
+    void viewPersonsByCity(AddressBook addressBook) {
+        System.out.print("Enter the city to search: ");
+        String city = sc.nextLine();
+        System.out.println("Persons in " + city + ":");
+        addressBook.viewPersonsByCity(city);
+    }
+
+    void viewPersonsByState(AddressBook addressBook) {
+        System.out.print("Enter the state to search: ");
+        String state = sc.nextLine();
+        System.out.println("Persons in " + state + ":");
+        addressBook.viewPersonsByState(state);
     }
 }

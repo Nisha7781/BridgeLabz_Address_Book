@@ -106,4 +106,18 @@ class AddressBook
                 .filter(contact -> contact.city.equalsIgnoreCase(cityOrState) || contact.state.equalsIgnoreCase(cityOrState))
                 .collect(Collectors.toList());
     }
+
+    void viewPersonsByCity(String city)
+    {
+        contacts.stream()
+                .filter(contact -> contact.city.equalsIgnoreCase(city))
+                .forEach(System.out::println);
+    }
+
+    void viewPersonsByState(String state)
+    {
+        contacts.stream()
+                .filter(contact -> contact.state.equalsIgnoreCase(state))
+                .forEach(System.out::println);
+    }
 }
