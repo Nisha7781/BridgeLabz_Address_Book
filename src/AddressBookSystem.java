@@ -24,7 +24,8 @@ public class AddressBookSystem
             System.out.println("3. Search Person by City or State");
             System.out.println("4. Count contact by city");
             System.out.println("5. Count contact by State");
-            System.out.println("6. Exit");
+            System.out.println("6. Sort address book by name");
+            System.out.println("7. Exit");
             System.out.print("Enter your choice: ");
             int choice = sc.nextInt();
             sc.nextLine();
@@ -47,6 +48,9 @@ public class AddressBookSystem
                     countContactsByState();
                     break;
                 case 6:
+                    sortAddressBookByName();
+                    break;
+                case 7:
                     System.out.println("Exiting...");
                     return;
                 default:
@@ -187,5 +191,25 @@ public class AddressBookSystem
                 .mapToLong(addressBook -> addressBook.countContactsByState(state))
                 .sum();
         System.out.println("\nTotal contacts in " + state + ": " + count);
+    }
+
+    //Sort contacts by name
+    void sortAddressBookByName()
+    {
+        System.out.print("Enter the name of the Address Book to sort: ");
+        String addressBookName = sc.nextLine();
+
+        if (addressBooks.containsKey(addressBookName))
+        {
+            AddressBook addressBook = addressBooks.get(addressBookName);
+            addressBook.sortContactsByName();
+            System.out.println("Address Book sorted by name.");
+            System.out.println(addressBook);
+
+        }
+        else
+        {
+            System.out.println("Address Book does not exist!");
+        }
     }
 }

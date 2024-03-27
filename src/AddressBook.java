@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 class AddressBook
@@ -135,4 +132,24 @@ class AddressBook
                 .filter(contact -> contact.state.equalsIgnoreCase(state))
                 .count();
     }
+
+    //sort contacts by name
+    void sortContactsByName()
+    {
+        contacts = contacts.stream()
+                .sorted(Comparator.comparing(contact -> contact.firstName + " " + contact.lastName))
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    @Override
+    public String toString()
+    {
+        StringBuilder sb = new StringBuilder();
+        for (Contact contact : contacts)
+        {
+            sb.append(contact.toString()).append("\n");
+        }
+        return sb.toString();
+    }
+
 }
